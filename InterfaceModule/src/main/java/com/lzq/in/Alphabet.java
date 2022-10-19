@@ -1,4 +1,4 @@
-package com.lzq;
+package com.lzq.in;
 
 /**
  * @author wujuan

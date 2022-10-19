@@ -1,4 +1,4 @@
-package com.lzq;
+package com.lzq.aaa;
 
 /**
  * @author wujuan
@@ -7,5 +7,5 @@ package com.lzq;
  * @email wujuan@dtstack.com
  * @company www.dtstack.com
  */
-public class A2 {
+public class A3 {
 }

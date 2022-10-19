@@ -1,4 +1,4 @@
-package com.lzq;
+package com.lzq.ddd;
 
 /**
  * @author wujuan
@@ -7,5 +7,8 @@ package com.lzq;
  * @email wujuan@dtstack.com
  * @company www.dtstack.com
  */
-public class C3 {
+public class D3 {
+    public void d3() {
+
+    }
 }

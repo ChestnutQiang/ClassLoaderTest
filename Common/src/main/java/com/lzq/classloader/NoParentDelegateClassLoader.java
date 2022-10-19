@@ -12,7 +12,6 @@ import java.net.URLClassLoader;
  */
 public class NoParentDelegateClassLoader extends URLClassLoader {
 
-
     protected ClassLoader parent;
 
     public NoParentDelegateClassLoader(URL[] urls, ClassLoader parent) {
@@ -25,18 +24,19 @@ public class NoParentDelegateClassLoader extends URLClassLoader {
         Class<?> loadedClass = findLoadedClass(name);
         Class<?> clazz;
         if (null == loadedClass) {
-            //子类先加载
+            // 子类先加载
             try {
                 clazz = findClass(name);
                 if (clazz != null) {
-                    System.out.println("Loading class from NoParentDelegateClassLoader");
+                    System.out.println(
+                            "Loading class from NoParentDelegateClassLoader : " + this);
                     return clazz;
                 }
             } catch (ClassNotFoundException e) {
                 // Ignore
             }
         }
-        //父类加载
+        // 父类加载
         return super.loadClass(name);
     }
 }

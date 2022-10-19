@@ -1,4 +1,6 @@
-package com.lzq;
+package com.lzq.bbb;
+
+import com.lzq.in.Alphabet;
 
 /**
  * @author wujuan
@@ -7,7 +9,7 @@ package com.lzq;
  * @email wujuan@dtstack.com
  * @company www.dtstack.com
  */
-public class B6 implements Alphabet {
+public class B4 implements Alphabet {
     @Override
     public void pronounce() {
         System.out.println("I'am " + this.getClass().getName());
