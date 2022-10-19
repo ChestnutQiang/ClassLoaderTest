@@ -14,6 +14,19 @@ import java.util.ServiceLoader;
  */
 public class D1 {
 
+    /*
+             BootstrapClassloader
+                     |
+             ExtClassloader
+                     |
+             AppClassloader
+                     |
+             classloader1    ---------------->   AAA,CCC,DDD
+                     |
+             classloader1    ---------------->   AAA,CCC,DDD
+                     |
+             classloader2    ---------------->   BBB,CCC,DDD
+   */
     public void d1() {
 
         System.out.println("The d1 method called");
