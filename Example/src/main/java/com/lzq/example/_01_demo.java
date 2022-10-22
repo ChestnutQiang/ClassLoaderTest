@@ -38,7 +38,8 @@ public class _01_demo {
         Class<?> b = classloader2.loadClass("com.lzq.bbb.B0");
         C1 c1 = new C1();
         Thread.currentThread().setContextClassLoader(classloader1);
-        C2 c2 = new C2();
+        C2 c2 = null;
+        c2 = new C2();
         try {
             Class.forName("com.lzq.aaa.A01"); // no
         } catch (Exception e) {

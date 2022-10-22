@@ -58,4 +58,98 @@ public class ClassLoaderFactory {
 
         return classloader2;
     }
+
+    /*
+                BootstrapClassloader
+                        |
+                ExtClassloader
+                        |
+                AppClassloader
+                        |
+                classloader1    ---------------->   AAA,CCC,DDD
+                        |
+                classloader2    ---------------->   BBB,CCC,DDD
+                        |
+                classloader3    ---------------->   AAA,CCC,DDD
+     */
+    public static ClassLoader createClassLoaderChain3() {
+
+        File AAAJar = new File("./AAA/target/AAA-1.0-SNAPSHOT.jar");
+        File BBBJar = new File("./BBB/target/BBB-1.0-SNAPSHOT.jar");
+        File CCCJar = new File("./CCC/target/CCC-1.0-SNAPSHOT.jar");
+        File DDDJar = new File("./DDD/target/DDD-1.0-SNAPSHOT.jar");
+
+        System.out.println("Is file " + AAAJar.getName() + " exists ? " + AAAJar.exists());
+        System.out.println("Is file " + BBBJar.getName() + " exists ? " + BBBJar.exists());
+        System.out.println("Is file " + DDDJar.getName() + " exists ? " + DDDJar.exists());
+
+        URL AAAJarURL;
+        URL BBBJarURL;
+        URL CCCJarURL;
+        URL DDDJarURL;
+        try {
+            AAAJarURL = AAAJar.toURI().toURL();
+            BBBJarURL = BBBJar.toURI().toURL();
+            CCCJarURL = CCCJar.toURI().toURL();
+            DDDJarURL = DDDJar.toURI().toURL();
+        } catch (MalformedURLException e) {
+            throw new RuntimeException(e);
+        }
+
+        ClassLoader appClassLoader = Thread.currentThread().getContextClassLoader();
+        URLClassLoader classloader1 = new NoParentDelegateClassLoader(new URL[]{AAAJarURL, CCCJarURL, DDDJarURL}, appClassLoader);
+        URLClassLoader classloader2 = new NoParentDelegateClassLoader(new URL[]{BBBJarURL, CCCJarURL, DDDJarURL}, classloader1);
+        URLClassLoader classloader3 = new NoParentDelegateClassLoader(new URL[]{AAAJarURL, CCCJarURL, DDDJarURL}, classloader2);
+
+        return classloader3;
+    }
+
+
+    /*
+            BootstrapClassloader
+                    |
+            ExtClassloader
+                    |
+            AppClassloader
+                    |
+            classloader1    ---------------->   AAA,CCC,DDD,InterfaceModule
+                    |
+            classloader2    ---------------->   BBB,CCC,DDD,InterfaceModule
+                    |
+            classloader3    ---------------->   BBB,CCC,DDD,InterfaceModule
+    */
+    public static ClassLoader createClassLoaderChain4() {
+
+        File AAAJar = new File("./AAA/target/AAA-1.0-SNAPSHOT.jar");
+        File BBBJar = new File("./BBB/target/BBB-1.0-SNAPSHOT.jar");
+        File CCCJar = new File("./CCC/target/CCC-1.0-SNAPSHOT.jar");
+        File DDDJar = new File("./DDD/target/DDD-1.0-SNAPSHOT.jar");
+        File InterfaceJar = new File("./InterfaceModule/target/InterfaceModule-1.0-SNAPSHOT.jar");
+
+        System.out.println("Is file " + AAAJar.getName() + " exists ? " + AAAJar.exists());
+        System.out.println("Is file " + BBBJar.getName() + " exists ? " + BBBJar.exists());
+        System.out.println("Is file " + DDDJar.getName() + " exists ? " + DDDJar.exists());
+
+        URL AAAJarURL;
+        URL BBBJarURL;
+        URL CCCJarURL;
+        URL DDDJarURL;
+        URL InterfaceJarURL;
+        try {
+            AAAJarURL = AAAJar.toURI().toURL();
+            BBBJarURL = BBBJar.toURI().toURL();
+            CCCJarURL = CCCJar.toURI().toURL();
+            DDDJarURL = DDDJar.toURI().toURL();
+            InterfaceJarURL = InterfaceJar.toURI().toURL();
+        } catch (MalformedURLException e) {
+            throw new RuntimeException(e);
+        }
+
+        ClassLoader appClassLoader = Thread.currentThread().getContextClassLoader();
+        URLClassLoader classloader1 = new NoParentDelegateClassLoader(new URL[]{AAAJarURL, CCCJarURL, DDDJarURL, InterfaceJarURL}, appClassLoader);
+        URLClassLoader classloader2 = new NoParentDelegateClassLoader(new URL[]{BBBJarURL, CCCJarURL, DDDJarURL, InterfaceJarURL}, classloader1);
+        URLClassLoader classloader3 = new NoParentDelegateClassLoader(new URL[]{BBBJarURL, CCCJarURL, DDDJarURL, InterfaceJarURL}, classloader2);
+
+        return classloader3;
+    }
 }

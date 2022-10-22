@@ -1,5 +1,7 @@
 package com.lzq.aaa;
 
+import com.lzq.in.Alphabet;
+
 /**
  * @author wujuan
  * @version 1.0
@@ -7,5 +9,9 @@ package com.lzq.aaa;
  * @email wujuan@dtstack.com
  * @company www.dtstack.com
  */
-public class A3 {
+public class A3 implements Alphabet {
+    @Override
+    public void pronounce() {
+        System.out.println(" A3 ------------>");
+    }
 }

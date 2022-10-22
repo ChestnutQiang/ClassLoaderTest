@@ -1,5 +1,7 @@
 package com.lzq.ddd;
 
+import com.lzq.in.Alphabet;
+
 /**
  * @author wujuan
  * @version 1.0
@@ -7,7 +9,12 @@ package com.lzq.ddd;
  * @email wujuan@dtstack.com
  * @company www.dtstack.com
  */
-public class D4 {
+public class D4 implements Alphabet {
 
     public static void d4() {}
+
+    @Override
+    public void pronounce() {
+
+    }
 }
